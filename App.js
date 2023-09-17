@@ -1,37 +1,19 @@
-//Import
-import { View, Text, TextInput, Image, StyleSheet } from 'react-native'
+import { NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
+import Login from "./src/screens/Login"
+import Home from "./src/screens/Home"
 
-//Define
+const Stack = createStackNavigator()
+
 const App = () => {
-
 	return (
-		<View style={styles.view}>
-        <View style={styles.title} >
-          <Text style={styles.text}>Satisfying.you</Text>
-        </View>
-				
-		</View>
+		<NavigationContainer>
+			<Stack.Navigator initialRouteName="Login" screenOptions={{ headerTintColor:'#ffffff', headerStyle: {backgroundColor:'#372775'}, headerTitleStyle: {fontFamily: 'AveriaLibre-Regular'}}}>
+				<Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
+				<Stack.Screen name="Home" component={Home} options={{ headerShown: false }}/>
+			</Stack.Navigator>
+		</NavigationContainer>
 	)
 }
 
-const styles = StyleSheet.create({
-	view: {
-		flex: 1,
-		flexDirection: 'column',
-		backgroundColor: '#372775',
-		padding: 20,
-	},
-	title: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-	},
-  text: {
-    fontSize: 36,
-		color: '#ffffff',
-		fontFamily: 'AveriaLibre-Regular',
-  }
-})
-
-
-//Export
-export default App
+export default App;
