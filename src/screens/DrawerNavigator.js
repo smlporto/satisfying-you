@@ -9,6 +9,27 @@ const DrawerNavigator = (props) => {
             </View>
             <View style={styles.line} />
             <DrawerItemList {...props} />
+            <DrawerItem
+                labelStyle={{ color: '#ffffff', fontFamily: 'AveriaLibre-Regular' }}
+                label="Ações de Pesquisa"
+                onPress={() => {
+                    props.navigation.navigate('AcoesPesquisa');
+                }}
+                />
+            <DrawerItem
+                labelStyle={{ color: '#ffffff', fontFamily: 'AveriaLibre-Regular' }}
+                label="Coleta"
+                onPress={() => {
+                    props.navigation.navigate('Coleta');
+                }}
+                />
+            <DrawerItem
+                labelStyle={{ color: '#ffffff', fontFamily: 'AveriaLibre-Regular' }}
+                label="Agradecimento Participacao"
+                onPress={() => {
+                    props.navigation.navigate('AgradecimentoParticipacao');
+                }}
+                />
             <DrawerItem labelStyle={{ color: '#ffffff', fontFamily: 'AveriaLibre-Regular' }} label="Sair" onPress={() => { props.navigation.popToTop() }} />
         </DrawerContentScrollView>
     )
