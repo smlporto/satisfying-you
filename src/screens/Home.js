@@ -1,4 +1,4 @@
-import { DrawerContent, createDrawerNavigator } from "@react-navigation/drawer"
+import { createDrawerNavigator } from "@react-navigation/drawer"
 import Pesquisas from "./Pesquisas"
 import DrawerNavigator from "./DrawerNavigator"
 
