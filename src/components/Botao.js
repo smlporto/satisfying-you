@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontFamily: 'AveriaLibre-Regular',
+        textTransform: 'uppercase'
     },
     fundoBotao: {
         backgroundColor: '#37BD6D',

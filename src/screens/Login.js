@@ -30,6 +30,10 @@ const Login = (props) => {
 		props.navigation.navigate('Cadastro')
 	}
 
+    const goToRecuperar = () => {
+		props.navigation.navigate('RecuperarSenha')
+	}
+
 	return (
 		<PaperProvider theme={theme}>
 			<View style={styles.view}>
@@ -46,7 +50,7 @@ const Login = (props) => {
 				</View>
 				<View style={styles.section}>
 					<BotaoSecundario text="Criar minha conta" funcao={goToCadastro}/>
-					<BotaoSecundario text="Esqueci minha senha" color='#B0CCDE' />
+					<BotaoSecundario text="Esqueci minha senha" color='#B0CCDE'funcao={goToRecuperar} />
 				</View>
 			</View>
 		</PaperProvider>
