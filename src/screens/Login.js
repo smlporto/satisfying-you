@@ -45,7 +45,7 @@ const Login = (props) => {
 					<Text style={styles.label}>E-mail</Text>
 					<TextInput style={styles.textInput} value={txtEmail} onChangeText={setEmail} placeholder='Insira o seu e-mail' />
 					<Text style={styles.label}>Senha</Text>
-					<TextInput style={styles.textInput} value={txtSenha} onChangeText={setSenha} placeholder='Insira a sua senha' secureTextEntry={true} />
+					<TextInput style={styles.textInput} value={txtSenha} onChangeText={setSenha} placeholder='Insira a sua senha' secureTextEntry />
 					<Botao text="Entrar" funcao={goToHome} />
 				</View>
 				<View style={styles.section}>

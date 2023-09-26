@@ -17,10 +17,10 @@ const Cadastro = (props) => {
             <Text style={styles.label}>E-mail</Text>
             <TextInput style={styles.textInput} value={txtEmail} onChangeText={setEmail} placeholder='Insira o seu e-mail' />
             <Text style={styles.label}>Senha</Text>
-            <TextInput style={styles.textInput} value={txtSenha} onChangeText={setSenha} placeholder='Insira a sua senha' secureTextEntry={true} />
+            <TextInput style={styles.textInput} value={txtSenha} onChangeText={setSenha} placeholder='Insira a sua senha' secureTextEntry />
             <Text style={styles.label}>Repetir senha</Text>
-            <TextInput style={styles.textInput} value={txtRepetirSenha} onChangeText={setRepetirSenha} placeholder='Repita a sua senha' secureTextEntry={true} />
-            <Botao text="Cadastrar" funcao={goToLogin} />
+            <TextInput style={styles.textInput} value={txtRepetirSenha} onChangeText={setRepetirSenha} placeholder='Repita a sua senha' secureTextEntry />
+            <Botao text="CADASTRAR" funcao={goToLogin} />
         </View>
     )
 }
