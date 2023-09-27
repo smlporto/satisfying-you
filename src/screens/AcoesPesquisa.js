@@ -12,20 +12,20 @@ export default function App() {
     <View style={styles.container}>
       <TouchableOpacity onPress={() => handleSquarePress('Casa')}>
         <View style={styles.square}>
-          <Icon name="home" size={80} color="#fff" />
-          <Text style={styles.text}>Casa</Text>
+          <Icon name="edit" size={80} color="#fff" />
+          <Text style={styles.text}>Modificar</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => handleSquarePress('Estrela')}>
         <View style={styles.square}>
-          <Icon name="star" size={80} color="#fff" />
-          <Text style={styles.text}>Estrela</Text>
+          <Icon name="sentiment-very-satisfied" size={80} color="#fff" />
+          <Text style={styles.text}>Coleta de dados</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => handleSquarePress('Coração')}>
         <View style={styles.square}>
-          <Icon name="favorite" size={80} color="#fff" />
-          <Text style={styles.text}>Coração</Text>
+          <Icon name="pie-chart" size={80} color="#fff" />
+          <Text style={styles.text}>Relatório</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -44,14 +44,15 @@ const styles = StyleSheet.create({
   square: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 120,
-    height: 120,
+    width: 170,
+    height: 170,
     backgroundColor: '#312464',
-    borderRadius: 20,
+    borderRadius: 10,
   },
   text: {
     marginTop: 10,
     fontSize: 16,
     color: 'white',
+    fontFamily: 'AveriaLibre-Regular',
   },
 });
