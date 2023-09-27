@@ -21,16 +21,36 @@ const Login = (props) => {
 
 	const [txtEmail, setEmail] = useState('')
 	const [txtSenha, setSenha] = useState('')
+	const [txtError, setError] = useState('')
+
+	const isEmailValid = (email) => {
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+		return emailRegex.test(email)
+	}
 
 	const goToHome = () => {
-		props.navigation.navigate('Home')
+		if (txtEmail && txtSenha && isEmailValid(txtEmail)) {
+			props.navigation.navigate('Home')
+		} else {
+			setError('E-mail e/ou senha inválidos.')
+		}
+	}
+
+	const handleEmailChange = (text) => {
+		setEmail(text)
+		setError('')
+	}
+
+	const handleSenhaChange = (text) => {
+		setSenha(text)
+		setError('')
 	}
 
 	const goToCadastro = () => {
 		props.navigation.navigate('Cadastro')
 	}
 
-    const goToRecuperar = () => {
+	const goToRecuperar = () => {
 		props.navigation.navigate('RecuperarSenha')
 	}
 
@@ -43,14 +63,26 @@ const Login = (props) => {
 				</View>
 				<View style={styles.section}>
 					<Text style={styles.label}>E-mail</Text>
-					<TextInput style={styles.textInput} value={txtEmail} onChangeText={setEmail} placeholder='Insira o seu e-mail' />
+					<TextInput
+						style={styles.textInput}
+						value={txtEmail}
+						onChangeText={handleEmailChange}
+						placeholder="Insira o seu e-mail"
+					/>
 					<Text style={styles.label}>Senha</Text>
-					<TextInput style={styles.textInput} value={txtSenha} onChangeText={setSenha} placeholder='Insira a sua senha' secureTextEntry />
+					<TextInput
+						style={styles.textInput}
+						value={txtSenha}
+						onChangeText={handleSenhaChange}
+						placeholder="Insira a sua senha"
+						secureTextEntry
+					/>
+					{txtError ? <Text style={styles.errorText}>{txtError}</Text> : null}
 					<Botao text="Entrar" funcao={goToHome} />
 				</View>
 				<View style={styles.section}>
-					<BotaoSecundario text="Criar minha conta" funcao={goToCadastro}/>
-					<BotaoSecundario text="Esqueci minha senha" color='#B0CCDE'funcao={goToRecuperar} />
+					<BotaoSecundario text="Criar minha conta" funcao={goToCadastro} />
+					<BotaoSecundario text="Esqueci minha senha" color='#B0CCDE' funcao={goToRecuperar} />
 				</View>
 			</View>
 		</PaperProvider>
@@ -81,18 +113,24 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 		marginTop: 10,
 		color: '#ffffff',
-		fontFamily: 'AveriaLibre-Bold',
+		fontFamily: 'AveriaLibre-Regular',
 	},
 	textInput: {
 		fontSize: 20,
 		borderWidth: 1,
 		backgroundColor: '#ffffff',
 		borderColor: '#ffffff',
-		fontFamily: 'AveriaLibre-Bold',
+		fontFamily: 'AveriaLibre-Regular',
 		color: '#3F92C5',
 	},
 	section: {
 		marginTop: 40,
+	},
+	errorText: {
+		fontFamily: 'AveriaLibre-Regular',
+		color: 'red',
+		fontSize: 16,
+		marginTop: 5,
 	}
 })
 
