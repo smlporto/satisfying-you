@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         backgroundColor: '#ffffff',
         borderColor: '#ffffff',
-        fontFamily: 'AveriaLibre-Bold',
+        fontFamily: 'AveriaLibre-Regular',
         color: '#3F92C5',
         padding: 3,
         width: '90%',
