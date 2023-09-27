@@ -10,6 +10,10 @@ const Pesquisas = (props) => {
 		props.navigation.navigate('NovaPesquisa')
 	}
 
+    const goToModificarPesquisa = () => {
+		props.navigation.navigate('ModificarPesquisa')
+	}
+
     return (
         <View style={styles.view}>
             <View style={styles.container}>
@@ -18,10 +22,10 @@ const Pesquisas = (props) => {
             </View>
             <View style={{height: 180}}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <Card text='Pesquisa 1' data='25/09/2023'/>
-                    <Card text='Pesquisa 2' data='09/10/2023'/>
-                    <Card text='Pesquisa 3' data='25/11/2023'/>
-                    <Card text='Pesquisa 4' data='02/12/2023'/>
+                    <Card text='Pesquisa 1' data='25/09/2023' funcao={goToModificarPesquisa} />
+                    <Card text='Pesquisa 2' data='09/10/2023' funcao={goToModificarPesquisa} />
+                    <Card text='Pesquisa 3' data='25/11/2023' funcao={goToModificarPesquisa} />
+                    <Card text='Pesquisa 4' data='02/12/2023' funcao={goToModificarPesquisa} />
                 </ScrollView>
             </View>
             <Botao text='NOVA PESQUISA' funcao={goToNovaPesquisa}/>

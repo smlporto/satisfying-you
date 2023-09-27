@@ -1,13 +1,27 @@
 import { useState } from "react";
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Botao from "../components/Botao";
+import BotaoSecundario from "../components/BotaoSecundario";
 
 
-const ModificarPesquisa = () => {
+const ModificarPesquisa = (props) => {
     const [txtNome, setTxtNome] = useState('')
     const [txtData, setTxtData] = useState('')
     const [txtImg, setTxtImg] = useState('')
+    const [isVisible, setIsVisible] = useState(false)
+
+    const openModal = () => {
+        setIsVisible(true);
+    }
+
+    const closeModal = () => {
+        setIsVisible(false);
+    }
+
+	const goToHome = () => {
+		props.navigation.navigate('Home')
+	}
 
     return (
         <View style={styles.view}>
@@ -22,11 +36,21 @@ const ModificarPesquisa = () => {
 
             <View style={styles2.flexBtn}>
                 <Botao text="Salvar" />
-                <TouchableOpacity style={styles2.flexIcon}>
+                <TouchableOpacity style={styles2.flexIcon} onPress={openModal}>
                     <Icon name="delete" size={40} color="#ffffff" />
                     <Text style={styles2.textDelete}>Apagar</Text>
                 </TouchableOpacity>
             </View>
+
+            <Modal visible={isVisible} animationType="slide">
+                <View style={modal.modalContent}>
+                    <Text style={modal.text}>Tem certeza de apagar essa pesquisa?</Text>
+                    <View style={modal.flexBtn}>
+                        <BotaoSecundario text="Sim" color="#FF8383" funcao={goToHome} />
+                        <BotaoSecundario text="Cancelar" color="#3F92C5" funcao={closeModal} />
+                    </View>
+                </View>
+            </Modal>
         </View>
     );
 }
@@ -78,6 +102,30 @@ const styles2 = StyleSheet.create({
         height: '20%',
         width: '60%'
     },
+})
+
+const modal = StyleSheet.create({
+    modalContent: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#372775',
+        padding: 20,
+    },
+    text: {
+        fontSize: 30,
+        color: '#ffffff',
+        textAlign: 'center',
+    },
+    flexBtn: {
+        flexDirection: 'row',
+        gap: 20,
+        width: 200,
+        justifyContent: 'center',
+        paddingVertical: 20,
+        paddingHorizontal: 20,
+    }
 })
 
 export default ModificarPesquisa;

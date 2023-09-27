@@ -6,7 +6,7 @@ const RecuperarSenha = (props) => {
     const [txtEmail, setEmail] = useState('')
 
     const goToLogin = () => {
-        props.navigation.navigate('NovaPesquisa')
+        props.navigation.navigate('Login')
     }
 
     return (
