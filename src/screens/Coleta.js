@@ -8,7 +8,7 @@ export default function FeedbackScreen() {
   const handleFeedback = (value) => {
     setFeedback(value);
   };
-
+  
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -36,7 +36,6 @@ export default function FeedbackScreen() {
           <Text style={styles.iconText}>Excelente</Text>
         </TouchableOpacity>
       </View>
-      <Text style={styles.selectedFeedback}>Você selecionou: {feedback}</Text>
     </View>
   );
 }
@@ -61,6 +60,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: '90%',
     marginBottom: 30,
   },
   iconText: {
