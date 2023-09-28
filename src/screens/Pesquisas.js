@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
-//import { TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Botao from "../components/Botao";
 import Card from "../components/Card";
