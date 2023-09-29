@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function SurveyCompleteScreen() {
+const AgradecimentoParticipacao = (props) => {
+
+  setTimeout(() => {
+    props.navigation.navigate('Pesquisas')
+  }, 3000);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Obrigado por participar da pesquisa!</Text>
@@ -16,12 +21,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#372775',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 20,
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     color: '#fff',
     textAlign: 'center',
     marginBottom: 20,
     fontFamily: 'AveriaLibre-Regular',
   },
-});
+})
+
+export default AgradecimentoParticipacao
