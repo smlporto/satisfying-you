@@ -30,6 +30,13 @@ const DrawerNavigator = (props) => {
                     props.navigation.navigate('AgradecimentoParticipacao');
                 }}
             />
+            <DrawerItem
+                labelStyle={{ color: '#ffffff', fontFamily: 'AveriaLibre-Regular', fontSize: 16 }}
+                label="Relatório"
+                onPress={() => {
+                    props.navigation.navigate('Relatório');
+                }}
+            />
             <View style={styles.bottomItem}>
                 <DrawerItem
                     icon={() => <Icon style={styles.icon} name="sign-out" size={20} color="#ffffff" />}

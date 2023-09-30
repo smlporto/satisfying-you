@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal } from "react-native";
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, Image } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Botao from "../components/Botao";
 import BotaoSecundario from "../components/BotaoSecundario";
@@ -8,7 +8,6 @@ import BotaoSecundario from "../components/BotaoSecundario";
 const ModificarPesquisa = (props) => {
     const [txtNome, setTxtNome] = useState('')
     const [txtData, setTxtData] = useState('')
-    const [txtImg, setTxtImg] = useState('')
     const [isVisible, setIsVisible] = useState(false)
 
     const openModal = () => {
@@ -29,13 +28,13 @@ const ModificarPesquisa = (props) => {
             <TextInput style={styles.textInput} value={txtNome} onChangeText={setTxtNome} />
 
             <Text style={styles.label}>Data</Text>
-            <View style={styles2.container}>
-                <TextInput style={styles.textInput} value={txtData} onChangeText={setTxtData} />
-                <Icon style={styles2.icon} name="delete" size={40} color="#ffffff" />
+            <View style={styles2.inputIcon}>
+                <TextInput style={{flex: 1}} value={txtData} onChangeText={setTxtData} />
+                <Icon name="calendar-month" size={40} color="grey" />
             </View>
 
             <Text style={styles.label}>Imagem</Text>
-            <TextInput style={styles2.textInput} value={txtImg} onChangeText={setTxtImg} />
+            <View><Image style={styles2.image} source={{ uri: 'https://i.pinimg.com/originals/61/cc/b4/61ccb4842c843263bfbb13e3b77bfdab.jpg' }} /></View>
 
             <View style={styles2.flexBtn}>
                 <Botao text="Salvar" />
@@ -95,25 +94,9 @@ const styles2 = StyleSheet.create({
         fontSize: 18,
         color: '#ffffff',
     },
-    // textInput: {
-    //     fontSize: 20,
-    //     borderWidth: 1,
-    //     backgroundColor: '#ffffff',
-    //     borderColor: '#ffffff',
-    //     fontFamily: 'AveriaLibre-Bold',
-    //     color: '#3F92C5',
-    //     height: '20%',
-    //     width: '60%'
-    // },
-    textInput: {
-        fontSize: 16,
-        borderWidth: 1,
-        backgroundColor: '#ffffff',
-        borderColor: '#ffffff',
-        fontFamily: 'AveriaLibre-Regular',
-        color: '#3F92C5',
-        padding: 3,
-        width: '90vw',
+    image: {
+        width: '60%',
+        height: 94,
     },
     container: {
         backgroundColor: '#ffffff',
@@ -126,6 +109,12 @@ const styles2 = StyleSheet.create({
         width: '10%',
         color: '#8B8B8B',
     },
+    inputIcon: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#ffffff'
+    }
 })
 
 const modal = StyleSheet.create({
@@ -134,7 +123,7 @@ const modal = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#372775',
+        backgroundColor: '#2B1F5C',
         padding: 20,
     },
     text: {

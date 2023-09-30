@@ -48,8 +48,7 @@ const Login = (props) => {
 	}
 
 	const goToRecuperar = () => {
-		// props.navigation.navigate('RecuperarSenha')
-		props.navigation.navigate('Relatório')
+		props.navigation.navigate('RecuperarSenha')
 	}
 
 	return (
