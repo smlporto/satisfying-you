@@ -1,11 +1,9 @@
-//Import
 import { View, Text, Image, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { PaperProvider, MD3LightTheme as DefaultTheme } from 'react-native-paper'
 import { useState } from 'react'
 import Botao from '../components/Botao'
 import BotaoSecundario from '../components/BotaoSecundario'
-
 
 const theme = {
 	...DefaultTheme,
@@ -16,7 +14,6 @@ const theme = {
 	}
 }
 
-//Define
 const Login = (props) => {
 
 	const [txtEmail, setEmail] = useState('')
@@ -51,7 +48,8 @@ const Login = (props) => {
 	}
 
 	const goToRecuperar = () => {
-		props.navigation.navigate('RecuperarSenha')
+		// props.navigation.navigate('RecuperarSenha')
+		props.navigation.navigate('Relatório')
 	}
 
 	return (
