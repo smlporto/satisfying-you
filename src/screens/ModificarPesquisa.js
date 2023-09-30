@@ -19,9 +19,9 @@ const ModificarPesquisa = (props) => {
         setIsVisible(false);
     }
 
-	const goToHome = () => {
-		props.navigation.navigate('Home')
-	}
+    const goToHome = () => {
+        props.navigation.navigate('Home')
+    }
 
     return (
         <View style={styles.view}>
@@ -29,7 +29,10 @@ const ModificarPesquisa = (props) => {
             <TextInput style={styles.textInput} value={txtNome} onChangeText={setTxtNome} />
 
             <Text style={styles.label}>Data</Text>
-            <TextInput style={styles.textInput} value={txtData} onChangeText={setTxtData} />
+            <View style={styles2.container}>
+                <TextInput style={styles.textInput} value={txtData} onChangeText={setTxtData} />
+                <Icon style={styles2.icon} name="delete" size={40} color="#ffffff" />
+            </View>
 
             <Text style={styles.label}>Imagem</Text>
             <TextInput style={styles2.textInput} value={txtImg} onChangeText={setTxtImg} />
@@ -92,15 +95,36 @@ const styles2 = StyleSheet.create({
         fontSize: 18,
         color: '#ffffff',
     },
+    // textInput: {
+    //     fontSize: 20,
+    //     borderWidth: 1,
+    //     backgroundColor: '#ffffff',
+    //     borderColor: '#ffffff',
+    //     fontFamily: 'AveriaLibre-Bold',
+    //     color: '#3F92C5',
+    //     height: '20%',
+    //     width: '60%'
+    // },
     textInput: {
-        fontSize: 20,
+        fontSize: 16,
         borderWidth: 1,
         backgroundColor: '#ffffff',
         borderColor: '#ffffff',
-        fontFamily: 'AveriaLibre-Bold',
+        fontFamily: 'AveriaLibre-Regular',
         color: '#3F92C5',
-        height: '20%',
-        width: '60%'
+        padding: 3,
+        width: '90vw',
+    },
+    container: {
+        backgroundColor: '#ffffff',
+        flexDirection: 'row',
+        width: '100%',
+    },
+    icon: {
+        marginLeft: 10,
+        alignSelf: 'center',
+        width: '10%',
+        color: '#8B8B8B',
     },
 })
 

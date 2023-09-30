@@ -9,6 +9,7 @@ import AcoesPesquisa from "./src/screens/AcoesPesquisa"
 import AgradecimentoParticipacao from "./src/screens/AgradecimentoParticipacao"
 import ModificarPesquisa from "./src/screens/ModificarPesquisa"
 import NovaPesquisa from "./src/screens/NovaPesquisa"
+import Relatorio from "./src/screens/Relatorio"
 
 const Stack = createStackNavigator()
 
@@ -23,6 +24,7 @@ const App = () => {
 				<Stack.Screen name="Coleta" component={Coleta} options={{ headerShown: false }}/>
 				<Stack.Screen name="AcoesPesquisa" component={AcoesPesquisa} options={{ headerShown: false }}/>
 				<Stack.Screen name="NovaPesquisa" component={NovaPesquisa}/>
+				<Stack.Screen name="Relatório" component={Relatorio}/>
 				<Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa}/>
 				<Stack.Screen name="AgradecimentoParticipacao" component={AgradecimentoParticipacao} options={{ headerShown: false }}/>
 			</Stack.Navigator>
