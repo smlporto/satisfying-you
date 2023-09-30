@@ -10,10 +10,11 @@ const DrawerNavigator = (props) => {
             </View>
             <View style={styles.line} />
             <DrawerItem
+                icon={() => <Icon style={styles.icon} name="checklist" size={20} color={"#ffffff"} />}
                 labelStyle={{ color: '#ffffff', fontFamily: 'AveriaLibre-Regular', fontSize: 16 }}
                 label="Ações de Pesquisa"
-                onPress={() => {
-                    props.navigation.navigate('AcoesPesquisa');
+                onPress={() => { 
+                    props.navigation.navigate('AcoesPesquisa'); 
                 }}
             />
             <DrawerItem
@@ -64,8 +65,7 @@ const styles = StyleSheet.create({
     },
     bottomItem: {
         marginTop: 'auto',
-    }
-
+    },
 })
 
 export default DrawerNavigator
