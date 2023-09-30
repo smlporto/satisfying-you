@@ -53,7 +53,7 @@ const NovaPesquisa = (props) => {
             {txtDataError ? <Text style={styles.errorText}>{txtDataError}</Text> : null}
 
             <Text style={styles.label}>Imagem</Text>
-            <TextInput style={styles2.textInput} value={txtImg} onChangeText={setTxtImg} placeholder="Câmera/Galeria de imagens" />
+            <TextInput style={styles2.textInput} value={txtImg} onChangeText={handleImgChange} placeholder="Câmera/Galeria de imagens" />
             {txtImgError ? <Text style={styles.errorText}>{txtImgError}</Text> : null}
 
             <Botao text="Cadastrar" funcao={goToPesquisas} />

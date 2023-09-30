@@ -16,7 +16,7 @@ const Home = () => {
                 headerTitleStyle: { fontFamily: 'AveriaLibre-Regular' }
             }}
             drawerContent={(props) => <DrawerNavigator {...props} />} >
-            <Drawer.Screen name="Pesquisas" component={Pesquisas} />
+            <Drawer.Screen name="Pesquisas" component={Pesquisas} options={{ title: ''}} />
         </Drawer.Navigator>
     )
 }
