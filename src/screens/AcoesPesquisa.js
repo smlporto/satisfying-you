@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function App(props) {
 
@@ -21,19 +21,19 @@ export default function App(props) {
     <View style={styles.container}>
       <TouchableOpacity onPress={goToEditSearch}>
         <View style={styles.square}>
-          <Icon name="edit" size={80} color="#fff" />
+          <Icon name="file-document-edit-outline" size={80} color="#fff" />
           <Text style={styles.text}>Modificar</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={goToDataCollect}>
         <View style={styles.square}>
-          <Icon name="sentiment-very-satisfied" size={80} color="#fff" />
+          <Icon name="checkbox-multiple-marked-outline" size={80} color="#fff" />
           <Text style={styles.text}>Coleta de dados</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity onPress={goToReport}>
         <View style={styles.square}>
-          <Icon name="pie-chart" size={80} color="#fff" />
+          <Icon name="chart-donut" size={80} color="#fff" />
           <Text style={styles.text}>Relatório</Text>
         </View>
       </TouchableOpacity>

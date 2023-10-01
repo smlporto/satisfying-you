@@ -4,11 +4,12 @@ const Card = ( props ) => {
 
     const text = props.text
     const data = props.data
+    const imgUri = props.imgUri
 
     return (
         <View style={styles.square}>
             <TouchableOpacity style={styles.card} onPress={props.funcao}>
-                <Image style={styles.imagem} source={{ uri: 'https://i.pinimg.com/originals/61/cc/b4/61ccb4842c843263bfbb13e3b77bfdab.jpg' }} />
+                <Image style={styles.imagem} source={{ uri: imgUri }} />
                 <Text style={styles.nomePesquisa}>{text}</Text>
                 <Text style={styles.data}>{data}</Text>
             </TouchableOpacity>

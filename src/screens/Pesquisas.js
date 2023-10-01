@@ -21,10 +21,10 @@ const Pesquisas = (props) => {
             </View>
             <View style={{height: 180}}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <Card text='Pesquisa 1' data='25/09/2023' funcao={goToAcoesPesquisa} />
-                    <Card text='Pesquisa 2' data='09/10/2023' funcao={goToAcoesPesquisa} />
-                    <Card text='Pesquisa 3' data='25/11/2023' funcao={goToAcoesPesquisa} />
-                    <Card text='Pesquisa 4' data='02/12/2023' funcao={goToAcoesPesquisa} />
+                    <Card text='CARNAVAL 2024' data='03/03/2024' imgUri='https://cdn-icons-png.flaticon.com/512/737/737475.png' funcao={goToAcoesPesquisa}/>
+                    <Card text='SECOMP 2023' data='10/10/2023' imgUri='https://cdn-icons-png.flaticon.com/512/3879/3879707.png' funcao={goToAcoesPesquisa} />
+                    <Card text='UBUNTU 2022' data='25/11/2023' imgUri='https://cdn-icons-png.flaticon.com/512/3127/3127995.png' funcao={goToAcoesPesquisa} />
+                    <Card text='MENINAS CPU' data='02/12/2023' imgUri='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtQL1Y8AxcFJvBAXbtFQIuEIvrMcl2KTpqDg&usqp=CAU' funcao={goToAcoesPesquisa} />
                 </ScrollView>
             </View>
             <Botao text='NOVA PESQUISA' funcao={goToNovaPesquisa}/>

@@ -12,32 +12,12 @@ const DrawerNavigator = (props) => {
             <DrawerItem
                 icon={() => <Icon style={styles.icon} name="checklist" size={20} color={"#ffffff"} />}
                 labelStyle={{ color: '#ffffff', fontFamily: 'AveriaLibre-Regular', fontSize: 16 }}
-                label="Ações de Pesquisa"
+                label="Pesquisas"
                 onPress={() => { 
                     props.navigation.navigate('AcoesPesquisa'); 
                 }}
             />
-            <DrawerItem
-                labelStyle={{ color: '#ffffff', fontFamily: 'AveriaLibre-Regular', fontSize: 16 }}
-                label="Coleta"
-                onPress={() => {
-                    props.navigation.navigate('Coleta');
-                }}
-            />
-            <DrawerItem
-                labelStyle={{ color: '#ffffff', fontFamily: 'AveriaLibre-Regular', fontSize: 16 }}
-                label="Agradecimento Participacao"
-                onPress={() => {
-                    props.navigation.navigate('AgradecimentoParticipacao');
-                }}
-            />
-            <DrawerItem
-                labelStyle={{ color: '#ffffff', fontFamily: 'AveriaLibre-Regular', fontSize: 16 }}
-                label="Relatório"
-                onPress={() => {
-                    props.navigation.navigate('Relatório');
-                }}
-            />
+            
             <View style={styles.bottomItem}>
                 <DrawerItem
                     icon={() => <Icon style={styles.icon} name="sign-out" size={20} color="#ffffff" />}

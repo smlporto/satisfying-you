@@ -50,13 +50,13 @@ const NovaPesquisa = (props) => {
 
             <Text style={styles.label}>Data</Text>
             <View style={styles2.inputIcon}>
-                <TextInput style={{flex: 1}} value={txtData} onChangeText={handleDataChange} />
-                <Icon name="calendar-month" size={40} color="grey" />
+                <TextInput style={styles2.textInputIcon} value={txtData} onChangeText={handleDataChange} />
+                <Icon style={styles2.icon} name="calendar-month" size={30} />
             </View>
             {txtDataError ? <Text style={styles.errorText}>{txtDataError}</Text> : null}
 
             <Text style={styles.label}>Imagem</Text>
-            <TextInput style={styles2.textInput} value={txtImg} onChangeText={handleImgChange} placeholder="Câmera/Galeria de imagens" />
+            <TextInput style={styles2.textInputImagem} value={txtImg} onChangeText={handleImgChange} placeholder="Câmera/Galeria de imagens" />
             {txtImgError ? <Text style={styles.errorText}>{txtImgError}</Text> : null}
 
             <Botao text="Cadastrar" funcao={goToPesquisas} />
@@ -75,14 +75,14 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginTop: 10,
         color: '#ffffff',
-        fontFamily: 'AveriaLibre-Bold',
+        fontFamily: 'AveriaLibre-Regular',
     },
     textInput: {
         fontSize: 20,
         borderWidth: 1,
         backgroundColor: '#ffffff',
         borderColor: '#ffffff',
-        fontFamily: 'AveriaLibre-Bold',
+        fontFamily: 'AveriaLibre-Regular',
         color: '#3F92C5',
     },
     errorText: {
@@ -94,23 +94,37 @@ const styles = StyleSheet.create({
 })
 
 const styles2 = StyleSheet.create({
-    textInput: {
+    textInputIcon: {
         padding: 10,
         fontSize: 20,
         borderWidth: 1,
         backgroundColor: '#ffffff',
         borderColor: '#ffffff',
-        fontFamily: 'AveriaLibre-Bold',
+        fontFamily: 'AveriaLibre-Regular',
+        color: '#3F92C5',
+        width: '90%',
+    },
+    inputIcon: {
+        backgroundColor: '#ffffff',
+        flexDirection: 'row',
+        width: '100%',
+    },
+    icon: {
+        alignSelf: 'center',
+        width: '10%',
+        color: '#8B8B8B',
+    },
+    textInputImagem: {
+        padding: 10,
+        fontSize: 20,
+        borderWidth: 1,
+        backgroundColor: '#ffffff',
+        borderColor: '#ffffff',
+        fontFamily: 'AveriaLibre-Regular',
         color: '#3F92C5',
         width: '60%',
         height: 94,
     },
-    inputIcon: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#ffffff'
-    }
 })
 
 export default NovaPesquisa;

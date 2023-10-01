@@ -6,8 +6,8 @@ import BotaoSecundario from "../components/BotaoSecundario";
 
 
 const ModificarPesquisa = (props) => {
-    const [txtNome, setTxtNome] = useState('')
-    const [txtData, setTxtData] = useState('')
+    const [txtNome, setTxtNome] = useState('Carnaval 2024')
+    const [txtData, setTxtData] = useState('16/02/2024')
     const [isVisible, setIsVisible] = useState(false)
 
     const openModal = () => {
@@ -29,15 +29,17 @@ const ModificarPesquisa = (props) => {
 
             <Text style={styles.label}>Data</Text>
             <View style={styles2.inputIcon}>
-                <TextInput style={{flex: 1}} value={txtData} onChangeText={setTxtData} />
-                <Icon name="calendar-month" size={40} color="grey" />
+                <TextInput style={styles2.textInputIcon} value={txtData} onChangeText={setTxtData} />
+                <Icon style={styles2.icon} name="calendar-month" size={30} />
             </View>
 
             <Text style={styles.label}>Imagem</Text>
-            <View><Image style={styles2.image} source={{ uri: 'https://i.pinimg.com/originals/61/cc/b4/61ccb4842c843263bfbb13e3b77bfdab.jpg' }} /></View>
+            <View style={styles.imgContainer}>
+                <Image style={styles2.image} source={{ uri: 'https://cdn-icons-png.flaticon.com/512/737/737475.png' }} />
+            </View>
 
             <View style={styles2.flexBtn}>
-                <Botao text="Salvar" />
+                <Botao text="Salvar" funcao={goToHome} />
                 <TouchableOpacity style={styles2.flexIcon} onPress={openModal}>
                     <Icon name="delete" size={40} color="#ffffff" />
                     <Text style={styles2.textDelete}>Apagar</Text>
@@ -78,6 +80,11 @@ const styles = StyleSheet.create({
         fontFamily: 'AveriaLibre-Bold',
         color: '#3F92C5',
     },
+    imgContainer: {
+        backgroundColor: '#ffffff',
+        width: '60%',
+        height: 94
+    }
 })
 
 const styles2 = StyleSheet.create({
@@ -97,24 +104,33 @@ const styles2 = StyleSheet.create({
     image: {
         width: '60%',
         height: 94,
+        alignSelf: 'center'
     },
     container: {
         backgroundColor: '#ffffff',
         flexDirection: 'row',
         width: '100%',
     },
+    textInputIcon: {
+        padding: 10,
+        fontSize: 20,
+        borderWidth: 1,
+        backgroundColor: '#ffffff',
+        borderColor: '#ffffff',
+        fontFamily: 'AveriaLibre-Regular',
+        color: '#3F92C5',
+        width: '90%',
+    },
+    inputIcon: {
+        backgroundColor: '#ffffff',
+        flexDirection: 'row',
+        width: '100%',
+    },
     icon: {
-        marginLeft: 10,
         alignSelf: 'center',
         width: '10%',
         color: '#8B8B8B',
     },
-    inputIcon: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#ffffff'
-    }
 })
 
 const modal = StyleSheet.create({
@@ -130,6 +146,7 @@ const modal = StyleSheet.create({
         fontSize: 30,
         color: '#ffffff',
         textAlign: 'center',
+        fontFamily: 'AveriaLibre-Regular',
     },
     flexBtn: {
         flexDirection: 'row',
