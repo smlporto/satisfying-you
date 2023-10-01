@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const AgradecimentoParticipacao = (props) => {
 
   setTimeout(() => {
-    props.navigation.navigate('Pesquisas')
+    props.navigation.navigate('Coleta')
   }, 3000);
 
   return (
