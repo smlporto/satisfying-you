@@ -3,24 +3,31 @@ import { Image, StyleSheet, Text, View } from "react-native";
 const Relatorio = () => {
     return (
         <View style={styles.view}>
+            {/* Imagem */}
             <Image style={styles.imagem} source={require('../../assets/img/grafico.png')}/>
+
+            {/* Container de legendas */}
             <View style={styles.containerList}>
                 <View style={styles.data}>
                     <View style={styles.square1}/>
                     <Text style={styles.opinionList}>Excelente</Text>
                 </View>
+
                 <View style={styles.data}>
                     <View style={styles.square2}/>
                     <Text style={styles.opinionList}>Bom</Text>
                 </View>
+
                 <View style={styles.data}>
                     <View style={styles.square3}/>
                     <Text style={styles.opinionList}>Neutro</Text>
                 </View>
+
                 <View style={styles.data}>
                     <View style={styles.square4}/>
                     <Text style={styles.opinionList}>Ruim</Text>
                 </View>
+
                 <View style={styles.data}>
                     <View style={styles.square5}/>
                     <Text style={styles.opinionList}>Péssimo</Text>

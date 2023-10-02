@@ -2,7 +2,7 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 const BotaoSecundario = (props) => {
     const text = props.text;
-    const color = props.color || "#419ED7"; // Default color is '#37BD6D'
+    const color = props.color || "#419ED7";
 
     const buttonStyle = {
         ...styles.fundoBotao,

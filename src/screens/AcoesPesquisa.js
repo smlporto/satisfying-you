@@ -15,7 +15,6 @@ export default function App(props) {
   const goToReport = () => {
     props.navigation.navigate('Relatório')
   };
-
   
   return (
     <View style={styles.container}>
@@ -25,12 +24,14 @@ export default function App(props) {
           <Text style={styles.text}>Modificar</Text>
         </View>
       </TouchableOpacity>
+
       <TouchableOpacity onPress={goToDataCollect}>
         <View style={styles.square}>
           <Icon name="checkbox-multiple-marked-outline" size={80} color="#fff" />
           <Text style={styles.text}>Coleta de dados</Text>
         </View>
       </TouchableOpacity>
+
       <TouchableOpacity onPress={goToReport}>
         <View style={styles.square}>
           <Icon name="chart-donut" size={80} color="#fff" />
@@ -42,15 +43,15 @@ export default function App(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: { // Define um contêiner flexível
     flex: 1,
-    flexDirection: 'col',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#372775',
     gap: 30,
   },
-  square: {
+  square: { // Define o estilo para os quadrados
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,

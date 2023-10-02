@@ -52,12 +52,14 @@ const Login = (props) => {
 	}
 
 	return (
-		<PaperProvider theme={theme}>
+		// O componente PaperProvider envolve o conteúdo com o tema (theme) especificado
+		<PaperProvider theme={theme}> 
 			<View style={styles.view}>
 				<View style={styles.title} >
 					<Text style={styles.titleText}>Satisfying.you</Text>
 					<Icon style={styles.icon} name="sentiment-satisfied-alt" size={40} color="#ffffff" />
 				</View>
+
 				<View style={styles.section}>
 					<Text style={styles.label}>E-mail</Text>
 					<TextInput
@@ -77,6 +79,7 @@ const Login = (props) => {
 					{txtError ? <Text style={styles.errorText}>{txtError}</Text> : null}
 					<Botao text="Entrar" funcao={goToHome} />
 				</View>
+
 				<View style={styles.section}>
 					<BotaoSecundario text="Criar minha conta" funcao={goToCadastro} />
 					<BotaoSecundario text="Esqueci minha senha" color='#B0CCDE' funcao={goToRecuperar} />
@@ -87,32 +90,32 @@ const Login = (props) => {
 }
 
 const styles = StyleSheet.create({
-	view: {
+	view: { // Estilo para o componente de visualização principal
 		flex: 1,
 		flexDirection: 'column',
 		backgroundColor: '#372775',
 		padding: 20,
 	},
-	title: {
+	title: { // Estilo para a seção do título e ícone
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
-	titleText: {
+	titleText: { // Estilo para o texto do título
 		fontSize: 36,
 		color: '#ffffff',
 		fontFamily: 'AveriaLibre-Regular',
 	},
-	icon: {
+	icon: { // Estilo para o ícone
 		marginLeft: 15,
 	},
-	label: {
+	label: { // Estilo para os rótulos
 		fontSize: 24,
 		marginTop: 10,
 		color: '#ffffff',
 		fontFamily: 'AveriaLibre-Regular',
 	},
-	textInput: {
+	textInput: { // Estilo para os campos de entrada de texto
 		fontSize: 20,
 		borderWidth: 1,
 		backgroundColor: '#ffffff',
@@ -120,16 +123,15 @@ const styles = StyleSheet.create({
 		fontFamily: 'AveriaLibre-Regular',
 		color: '#3F92C5',
 	},
-	section: {
+	section: { // Estilo para as seções
 		marginTop: 40,
 	},
-	errorText: {
+	errorText: { // Estilo para a mensagem de erro
 		fontFamily: 'AveriaLibre-Regular',
 		color: 'red',
 		fontSize: 16,
 		marginTop: 5,
 	}
 })
-
 
 export default Login

@@ -29,7 +29,11 @@ const RecuperarSenha = (props) => {
         <View style={styles.view}>
             <Text style={styles.label}>E-mail</Text>
             <TextInput style={styles.textInput} value={txtEmail} onChangeText={handleEmailChange} placeholder='Insira o seu e-mail' />
+            
+            {/* Exibe mensagem de erro se houver */}
             {txtError ? <Text style={styles.errorText}>{txtError}</Text> : null}
+
+            {/* Componente fabricado*/}
             <Botao text="Recuperar" funcao={goToLogin} />
         </View>
     )

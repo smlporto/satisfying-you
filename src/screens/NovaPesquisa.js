@@ -46,17 +46,21 @@ const NovaPesquisa = (props) => {
         <View style={styles.view}>
             <Text style={styles.label}>Nome</Text>
             <TextInput style={styles.textInput} value={txtNome} onChangeText={handleNomeChange} />
+            {/* Exibe mensagem de erro se houver */}
             {txtNomeError ? <Text style={styles.errorText}>{txtNomeError}</Text> : null}
 
+            {/* Rótulo "Data" */}
             <Text style={styles.label}>Data</Text>
-            <View style={styles2.inputIcon}>
-                <TextInput style={styles2.textInputIcon} value={txtData} onChangeText={handleDataChange} />
-                <Icon style={styles2.icon} name="calendar-month" size={30} />
+            <View style={styles.inputIcon}>
+                <TextInput style={styles.textInputIcon} value={txtData} onChangeText={handleDataChange} />
+                <Icon style={styles.icon} name="calendar-month" size={30} />
             </View>
+            {/* Exibe mensagem de erro se houver */}
             {txtDataError ? <Text style={styles.errorText}>{txtDataError}</Text> : null}
 
             <Text style={styles.label}>Imagem</Text>
-            <TextInput style={styles2.textInputImagem} value={txtImg} onChangeText={handleImgChange} placeholder="Câmera/Galeria de imagens" />
+            <TextInput style={styles.textInputImagem} value={txtImg} onChangeText={handleImgChange} placeholder="Câmera/Galeria de imagens" />
+            {/* Exibe mensagem de erro se houver */}
             {txtImgError ? <Text style={styles.errorText}>{txtImgError}</Text> : null}
 
             <Botao text="Cadastrar" funcao={goToPesquisas} />
@@ -90,10 +94,7 @@ const styles = StyleSheet.create({
         color: 'red',
         fontSize: 16,
         marginTop: 5,
-    }
-})
-
-const styles2 = StyleSheet.create({
+    },
     textInputIcon: {
         padding: 10,
         fontSize: 20,
@@ -124,7 +125,7 @@ const styles2 = StyleSheet.create({
         color: '#3F92C5',
         width: '60%',
         height: 94,
-    },
+    }
 })
 
 export default NovaPesquisa;

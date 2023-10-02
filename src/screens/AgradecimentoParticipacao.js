@@ -16,14 +16,14 @@ const AgradecimentoParticipacao = (props) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: { // Estilo para o componente 'container'
     flex: 1,
     backgroundColor: '#372775',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
   },
-  title: {
+  title: { // Estilo para os componentes 'title'
     fontSize: 24,
     color: '#fff',
     textAlign: 'center',

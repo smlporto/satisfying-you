@@ -27,25 +27,29 @@ const ModificarPesquisa = (props) => {
             <Text style={styles.label}>Nome</Text>
             <TextInput style={styles.textInput} value={txtNome} onChangeText={setTxtNome} />
 
+            {/* Rótulo "Data" */}
             <Text style={styles.label}>Data</Text>
-            <View style={styles2.inputIcon}>
-                <TextInput style={styles2.textInputIcon} value={txtData} onChangeText={setTxtData} />
-                <Icon style={styles2.icon} name="calendar-month" size={30} />
+            <View style={styles.inputIcon}>
+                <TextInput style={styles.textInputIcon} value={txtData} onChangeText={setTxtData} />
+                <Icon style={styles.icon} name="calendar-month" size={30} />
             </View>
-
+            
+            {/* Exibição da imagem */}
             <Text style={styles.label}>Imagem</Text>
             <View style={styles.imgContainer}>
-                <Image style={styles2.image} source={{ uri: 'https://cdn-icons-png.flaticon.com/512/737/737475.png' }} />
+                <Image style={styles.image} source={{ uri: 'https://cdn-icons-png.flaticon.com/512/737/737475.png' }} />
             </View>
 
-            <View style={styles2.flexBtn}>
+            {/* Seção de botões */}
+            <View style={styles.flexBtn}>
                 <Botao text="Salvar" funcao={goToHome} />
-                <TouchableOpacity style={styles2.flexIcon} onPress={openModal}>
+                <TouchableOpacity style={styles.flexIcon} onPress={openModal}>
                     <Icon name="delete" size={40} color="#ffffff" />
-                    <Text style={styles2.textDelete}>Apagar</Text>
+                    <Text style={styles.textDelete}>Apagar</Text>
                 </TouchableOpacity>
             </View>
 
+            {/* Modal de confirmação */}
             <Modal visible={isVisible} animationType="slide">
                 <View style={modal.modalContent}>
                     <Text style={modal.text}>Tem certeza de apagar essa pesquisa?</Text>
@@ -59,6 +63,7 @@ const ModificarPesquisa = (props) => {
     );
 }
 
+// Estilos para a tela principal
 const styles = StyleSheet.create({
     view: {
         flex: 1,
@@ -84,10 +89,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         width: '60%',
         height: 94
-    }
-})
-
-const styles2 = StyleSheet.create({
+    },
     flexBtn: {
         flexDirection: 'column',
         alignItems: 'center',
@@ -130,9 +132,10 @@ const styles2 = StyleSheet.create({
         alignSelf: 'center',
         width: '10%',
         color: '#8B8B8B',
-    },
+    }
 })
 
+// Estilos para o modal de confirmação
 const modal = StyleSheet.create({
     modalContent: {
         flex: 1,

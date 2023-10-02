@@ -46,32 +46,36 @@ const Cadastro = (props) => {
         <View style={styles.view}>
             <Text style={styles.label}>E-mail</Text>
             <TextInput style={styles.textInput} value={txtEmail} onChangeText={handleEmailChange} placeholder='Insira o seu e-mail' />
+			 {/* Renderiza uma mensagem de erro se houver um erro de e-mail */}
 			{txtEmailError ? <Text style={styles.errorText}>{txtEmailError}</Text> : null}
 
             <Text style={styles.label}>Senha</Text>
             <TextInput style={styles.textInput} value={txtSenha} onChangeText={handleSenhaChange} placeholder='Insira a sua senha' secureTextEntry />
             <Text style={styles.label}>Repetir senha</Text>
-            <TextInput style={styles.textInput} value={txtRepetirSenha} onChangeText={handleRepetirSenhaChange} placeholder='Repita a sua senha' secureTextEntry />
+            
+			<TextInput style={styles.textInput} value={txtRepetirSenha} onChangeText={handleRepetirSenhaChange} placeholder='Repita a sua senha' secureTextEntry />
+			{/* Renderiza uma mensagem de erro se houver um erro de senha */}
 			{txtSenhaError ? <Text style={styles.errorText}>{txtSenhaError}</Text> : null}
-            <Botao text="CADASTRAR" funcao={goToLogin} />
+            
+			<Botao text="CADASTRAR" funcao={goToLogin} />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    view: {
+    view: { // Define o estilo para o componente View
 		flex: 1,
 		flexDirection: 'column',
 		backgroundColor: '#372775',
 		padding: 20,
 	},
-	label: {
+	label: { // Define o estilo para os rótulos de texto
 		fontSize: 24,
 		marginTop: 10,
 		color: '#ffffff',
 		fontFamily: 'AveriaLibre-Regular',
 	},
-	textInput: {
+	textInput: { // Define o estilo para os campos de entrada de texto
 		fontSize: 20,
 		borderWidth: 1,
 		backgroundColor: '#ffffff',
@@ -79,13 +83,12 @@ const styles = StyleSheet.create({
 		fontFamily: 'AveriaLibre-Regular',
 		color: '#3F92C5',
 	},
-	errorText: {
+	errorText: { // Define o estilo para as mensagens de erro
 		fontFamily: 'AveriaLibre-Regular',
 		color: 'red',
 		fontSize: 16,
 		marginTop: 5,
 	}
 })
-
 
 export default Cadastro

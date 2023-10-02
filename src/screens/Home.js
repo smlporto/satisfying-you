@@ -16,6 +16,7 @@ const Home = () => {
                 headerTitleStyle: { fontFamily: 'AveriaLibre-Regular' }
             }}
             drawerContent={(props) => <DrawerNavigator {...props} />} >
+            {/* Define uma tela no drawer navigator */}
             <Drawer.Screen name="Pesquisas" component={Pesquisas} options={{ title: ''}} />
         </Drawer.Navigator>
     )

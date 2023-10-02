@@ -15,10 +15,13 @@ const Pesquisas = (props) => {
 
     return (
         <View style={styles.view}>
+            {/* Container para a barra de pesquisa */}
             <View style={styles.container}>
                 <Icon style={styles.icon} name="search" size={20} color="#ffffff" />
                 <TextInput style={styles.textInput} placeholder='Insira o termo de busca...' />
             </View>
+
+            {/* Área de exibição de cards com rolagem horizontal */}
             <View style={{height: 180}}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     <Card text='CARNAVAL 2024' data='03/03/2024' imgUri='https://cdn-icons-png.flaticon.com/512/737/737475.png' funcao={goToAcoesPesquisa}/>
@@ -27,8 +30,8 @@ const Pesquisas = (props) => {
                     <Card text='MENINAS CPU' data='02/12/2023' imgUri='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtQL1Y8AxcFJvBAXbtFQIuEIvrMcl2KTpqDg&usqp=CAU' funcao={goToAcoesPesquisa} />
                 </ScrollView>
             </View>
-            <Botao text='NOVA PESQUISA' funcao={goToNovaPesquisa}/>
 
+            <Botao text='NOVA PESQUISA' funcao={goToNovaPesquisa}/>
         </View>
     )
 }
