@@ -24,7 +24,7 @@ const App = () => {
 				<Stack.Screen name="Coleta" component={Coleta} options={{ headerShown: false }}/>
 				<Stack.Screen name="AcoesPesquisa" component={AcoesPesquisa} options={{ title: 'Carnaval' }}/>
 				<Stack.Screen name="NovaPesquisa" component={NovaPesquisa} options={{ title: 'Nova Pesquisa' }}/>
-        <Stack.Screen name="Relatório" component={Relatorio}/>
+        		<Stack.Screen name="Relatório" component={Relatorio}/>
 				<Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa} options={{ title: 'Modificar Pesquisa' }}/>
 				<Stack.Screen name="AgradecimentoParticipacao" component={AgradecimentoParticipacao} options={{ headerShown: false }}/>
 			</Stack.Navigator>
