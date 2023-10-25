@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet, TextInput } from "react-native"
 import { useState } from 'react'
+import { createUserWithEmailAndPassword } from "firebase/auth"
+import { auth_mod } from "../firebase/config"
 import Botao from '../components/Botao'
 
 const Cadastro = (props) => {
@@ -15,7 +17,7 @@ const Cadastro = (props) => {
 		return emailRegex.test(email)
 	}
 
-    const goToLogin = () => {
+    const cadastrarUsuario = () => {
 		if (!txtEmail || !isEmailValid(txtEmail)) {
 			setEmailError('E-mail parece ser inválido')
 		} else if (!txtSenha || txtSenha !== txtRepetirSenha) {
@@ -23,7 +25,15 @@ const Cadastro = (props) => {
 		} else {
 			setEmailError(null)
 			setSenhaError(null)
-			props.navigation.navigate('Login')
+			createUserWithEmailAndPassword(auth_mod, txtEmail, txtSenha)
+				.then((userCredential) => {
+					console.log("Usuário cadastrado com sucesso: " + JSON.stringify(userCredential))
+					props.navigation.navigate('Login')
+				})
+				.catch((error) => {
+					console.log("Erro ao cadastrar usuário: " + JSON.stringify(error))
+					setSenhaError('Algo deu errado. Tente novamente!')
+				})
 		}
 	}
 
@@ -57,7 +67,7 @@ const Cadastro = (props) => {
 			{/* Renderiza uma mensagem de erro se houver um erro de senha */}
 			{txtSenhaError ? <Text style={styles.errorText}>{txtSenhaError}</Text> : null}
             
-			<Botao text="CADASTRAR" funcao={goToLogin} />
+			<Botao text="CADASTRAR" funcao={cadastrarUsuario}/>
         </View>
     )
 }

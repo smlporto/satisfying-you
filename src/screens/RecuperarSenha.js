@@ -1,5 +1,7 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, Text, StyleSheet, TextInput } from "react-native"
 import { useState } from "react";
+import { sendPasswordResetEmail } from "firebase/auth"
+import { auth_mod } from "../firebase/config"
 import Botao from "../components/Botao"
 
 const RecuperarSenha = (props) => {
@@ -12,9 +14,13 @@ const RecuperarSenha = (props) => {
 		return emailRegex.test(email)
 	}
 
-    const goToLogin = () => {
+    const recuperarSenha = () => {
         if (txtEmail && isEmailValid(txtEmail)) {
-			props.navigation.navigate('Login')
+			sendPasswordResetEmail(auth_mod, txtEmail)
+                .then(() => {
+                    console.log('E-mail de recuperação enviado com sucesso!')
+                    props.navigation.navigate('Login')
+                })
 		} else {
 			setError('E-mail parece ser inválido')
 		}
@@ -34,7 +40,7 @@ const RecuperarSenha = (props) => {
             {txtError ? <Text style={styles.errorText}>{txtError}</Text> : null}
 
             {/* Componente fabricado*/}
-            <Botao text="Recuperar" funcao={goToLogin} />
+            <Botao text="Recuperar" funcao={recuperarSenha} />
         </View>
     )
 }

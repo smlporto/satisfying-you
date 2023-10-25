@@ -2,6 +2,8 @@ import { View, Text, Image, TextInput, StyleSheet, TouchableOpacity } from 'reac
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { PaperProvider, MD3LightTheme as DefaultTheme } from 'react-native-paper'
 import { useState } from 'react'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth_mod } from '../firebase/config'
 import Botao from '../components/Botao'
 import BotaoSecundario from '../components/BotaoSecundario'
 
@@ -27,7 +29,16 @@ const Login = (props) => {
 
 	const goToHome = () => {
 		if (txtEmail && txtSenha && isEmailValid(txtEmail)) {
-			props.navigation.navigate('Home')
+			signInWithEmailAndPassword(auth_mod, txtEmail, txtSenha)
+				.then((userLogged) => {
+					console.log('Usuário logado com sucesso: ' + JSON.stringify(userLogged))
+					props.navigation.navigate('Home')
+				})
+				.catch((error) => {
+					console.log('Erro ao logar usuário: ' + JSON.stringify(error))
+					setError('Algo deu errado. Tente novamente!')
+				})
+			
 		} else {
 			setError('E-mail e/ou senha inválidos.')
 		}
