@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { PaperProvider, MD3LightTheme as DefaultTheme } from 'react-native-paper'
 import { useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth_mod } from '../firebase/config'
+import { auth_mod } from '../config/firebase'
 import Botao from '../components/Botao'
 import BotaoSecundario from '../components/BotaoSecundario'
 

@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TextInput } from "react-native"
 import { useState } from 'react'
 import { createUserWithEmailAndPassword } from "firebase/auth"
-import { auth_mod } from "../firebase/config"
+import { auth_mod } from "../config/firebase"
 import Botao from '../components/Botao'
 
 const Cadastro = (props) => {
