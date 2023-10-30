@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native"
+import { collection, addDoc } from 'firebase/firestore'
+import { db } from '../config/firebase'
 import Botao from "../components/Botao"
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
@@ -12,7 +14,9 @@ const NovaPesquisa = (props) => {
     const [txtNomeError, setNomeError] = useState('')
     const [txtImgError, setImgError] = useState('')
 
-    const goToPesquisas = () => {
+    const pesquisaCollection = collection(db, 'pesquisas')
+
+    const addPesquisa = () => {
         if (!txtNome) {
             setNomeError('Preencha o nome da pesquisa');
         } else if (!txtData) {
@@ -23,7 +27,21 @@ const NovaPesquisa = (props) => {
             setDataError(null)
             setNomeError(null)
             setImgError(null)
-            props.navigation.navigate('Pesquisas');
+
+            const docPesquisa = {
+                nome: txtNome,
+                data: txtData,
+                img: txtImg,
+            }
+
+            addDoc(pesquisaCollection, docPesquisa).then( (docRef) => {
+                console.log('Pesquisa adicionada com sucesso!' + docRef.id)
+                props.navigation.navigate('Pesquisas')
+            }).catch( (error) => {
+                console.log('Erro ao adicionar pesquisa: ' + error)
+            })
+
+                
         }
     }
 
@@ -63,7 +81,7 @@ const NovaPesquisa = (props) => {
             {/* Exibe mensagem de erro se houver */}
             {txtImgError ? <Text style={styles.errorText}>{txtImgError}</Text> : null}
 
-            <Botao text="Cadastrar" funcao={goToPesquisas} />
+            <Botao text="Cadastrar" funcao={addPesquisa} />
         </View>
     );
 }
