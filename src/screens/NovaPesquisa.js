@@ -19,7 +19,7 @@ const NovaPesquisa = (props) => {
     const addPesquisa = () => {
         if (!txtNome) {
             setNomeError('Preencha o nome da pesquisa');
-        } else if (!txtData) {
+        } else if (!txtData || txtData.length < 10) {
             setDataError('Preencha a data')
         } else if (!txtImg) {
             setImgError('Preencha a imagem')
@@ -45,6 +45,8 @@ const NovaPesquisa = (props) => {
         }
     }
 
+    
+
     const handleNomeChange = (text) => {
         setTxtNome(text)
         setNomeError('')
@@ -53,6 +55,18 @@ const NovaPesquisa = (props) => {
     const handleDataChange = (text) => {
         setTxtData(text)
         setDataError('')
+        // Remove all non-numeric characters
+        text = text.replace(/[^0-9]/g, '');
+    
+        // Add "/" at position 2 and 5
+        if (text.length > 2) {
+          text = text.substring(0, 2) + '/' + text.substring(2);
+        }
+        if (text.length > 5) {
+          text = text.substring(0, 5) + '/' + text.substring(5);
+        }
+    
+        setTxtData(text);
     }
 
     const handleImgChange = (text) => {
@@ -70,7 +84,7 @@ const NovaPesquisa = (props) => {
             {/* Rótulo "Data" */}
             <Text style={styles.label}>Data</Text>
             <View style={styles.inputIcon}>
-                <TextInput style={styles.textInputIcon} value={txtData} onChangeText={handleDataChange} />
+                <TextInput style={styles.textInputIcon} value={txtData} onChangeText={handleDataChange} keyboardType="number-pad" maxLength={10}/>
                 <Icon style={styles.icon} name="calendar-month" size={30} />
             </View>
             {/* Exibe mensagem de erro se houver */}
