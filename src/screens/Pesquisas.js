@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TextInput, ScrollView, FlatList } from "react-native"
-import { collection, onSnapshot, query, orderBy } from 'firebase/firestore'
+import { collection, onSnapshot, query, orderBy, doc } from 'firebase/firestore'
 import { useEffect, useState } from "react"
 import { db } from '../config/firebase'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -29,7 +29,7 @@ const Pesquisas = (props) => {
 
     const itemPesquisa = ({ item }) => {
         return (
-            <Card text={item.nome} data={item.data} imgUri={item.img} funcao={goToAcoesPesquisa} />
+            <Card text={item.nome} data={item.data} imgUri={item.img} funcao={() => goToAcoesPesquisa(item.id)}/>
         )
     }
 
@@ -37,8 +37,9 @@ const Pesquisas = (props) => {
         props.navigation.navigate('NovaPesquisa')
     }
 
-    const goToAcoesPesquisa = () => {
-        props.navigation.navigate('AcoesPesquisa')
+    const goToAcoesPesquisa = (id) => {
+        const cardRef = doc(db, 'pesquisas', id)
+        props.navigation.navigate('AcoesPesquisa', { cardRef })
     }
 
     return (
