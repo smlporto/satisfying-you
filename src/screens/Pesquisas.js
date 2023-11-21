@@ -1,17 +1,46 @@
-import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TextInput, ScrollView, FlatList } from "react-native"
+import { collection, onSnapshot, query, orderBy, doc } from 'firebase/firestore'
+import { useEffect, useState } from "react"
+import { db } from '../config/firebase'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import Botao from "../components/Botao";
-import Card from "../components/Card";
+import Botao from "../components/Botao"
+import Card from "../components/Card"
 
 const Pesquisas = (props) => {
 
-    const goToNovaPesquisa = () => {
-		props.navigation.navigate('NovaPesquisa')
-	}
+    const [listaPesquisas, setListaPesquisas] = useState()
 
-    const goToAcoesPesquisa = () => {
-		props.navigation.navigate('AcoesPesquisa')
-	}
+    const pesquisaCollection = collection(db, 'pesquisas')
+
+    useEffect(() => {
+        const q = query(pesquisaCollection, orderBy('nome', 'asc'))
+
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const pesquisas = []
+            snapshot.forEach((doc) => {
+                pesquisas.push({
+                    id: doc.id,
+                    ...doc.data()
+                })
+            })
+            setListaPesquisas(pesquisas)
+        })
+    }, [])
+
+    const itemPesquisa = ({ item }) => {
+        return (
+            <Card text={item.nome} data={item.data} imgUri={item.img} funcao={() => goToAcoesPesquisa(item.id)}/>
+        )
+    }
+
+    const goToNovaPesquisa = () => {
+        props.navigation.navigate('NovaPesquisa')
+    }
+
+    const goToAcoesPesquisa = (id) => {
+        const cardRef = doc(db, 'pesquisas', id)
+        props.navigation.navigate('AcoesPesquisa', { cardRef })
+    }
 
     return (
         <View style={styles.view}>
@@ -22,16 +51,17 @@ const Pesquisas = (props) => {
             </View>
 
             {/* Área de exibição de cards com rolagem horizontal */}
-            <View style={{height: 180}}>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <Card text='CARNAVAL 2024' data='03/03/2024' imgUri='https://cdn-icons-png.flaticon.com/512/737/737475.png' funcao={goToAcoesPesquisa}/>
-                    <Card text='SECOMP 2023' data='10/10/2023' imgUri='https://cdn-icons-png.flaticon.com/512/3879/3879707.png' funcao={goToAcoesPesquisa} />
-                    <Card text='UBUNTU 2022' data='25/11/2023' imgUri='https://cdn-icons-png.flaticon.com/512/3127/3127995.png' funcao={goToAcoesPesquisa} />
-                    <Card text='MENINAS CPU' data='02/12/2023' imgUri='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtQL1Y8AxcFJvBAXbtFQIuEIvrMcl2KTpqDg&usqp=CAU' funcao={goToAcoesPesquisa} />
-                </ScrollView>
+            <View style={{ height: 180 }}>
+                <FlatList
+                    horizontal={true}
+                    data={listaPesquisas}
+                    renderItem={itemPesquisa}
+                    keyExtractor={item => item.id}
+                    showsHorizontalScrollIndicator={false}
+                />
             </View>
 
-            <Botao text='NOVA PESQUISA' funcao={goToNovaPesquisa}/>
+            <Botao text='NOVA PESQUISA' funcao={goToNovaPesquisa} />
         </View>
     )
 }
