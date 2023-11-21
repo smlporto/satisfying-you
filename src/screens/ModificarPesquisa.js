@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, Image } from "react-native";
+import { useEffect, useState } from "react"
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, Image } from "react-native"
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import Botao from "../components/Botao";
-import BotaoSecundario from "../components/BotaoSecundario";
+import Botao from "../components/Botao"
+import BotaoSecundario from "../components/BotaoSecundario"
+import { updateDoc, doc } from "firebase/firestore"
+import { db } from '../config/firebase'
 
 
 const ModificarPesquisa = (props) => {
@@ -15,7 +17,8 @@ const ModificarPesquisa = (props) => {
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(() => {
-        const cardData = props.route.params?.cardData
+        const { cardData } = props.route.params
+
         if (cardData) {
             setTxtNome(cardData.nome || '') 
             setTxtData(cardData.data || '')
@@ -32,13 +35,13 @@ const ModificarPesquisa = (props) => {
         setTxtData(text)
         setDataError('')
 
-        text = text.replace(/[^0-9]/g, '');
+        text = text.replace(/[^0-9]/g, '')
     
         if (text.length > 2) {
-          text = text.substring(0, 2) + '/' + text.substring(2);
+          text = text.substring(0, 2) + '/' + text.substring(2)
         }
         if (text.length > 5) {
-          text = text.substring(0, 5) + '/' + text.substring(5);
+          text = text.substring(0, 5) + '/' + text.substring(5)
         }
     
         setTxtData(text);
@@ -54,7 +57,7 @@ const ModificarPesquisa = (props) => {
     }
 
     const closeModal = () => {
-        setIsVisible(false);
+        setIsVisible(false)
     }
 
     const goToHome = () => {
@@ -69,10 +72,21 @@ const ModificarPesquisa = (props) => {
             setNomeError(null)
             setImgError(null)
 
-            props.navigation.navigate('Home')          
-        }
+            const { cardId } = props.route.params
+            const cardRef = doc(db, 'pesquisas', cardId)
+            const docPesquisa = {
+                nome: txtNome,
+                data: txtData,
+                img: txtImg,
+            }
 
-        
+            updateDoc(cardRef, docPesquisa).then( () => {
+                console.log('Pesquisa modificada com sucesso!')
+                props.navigation.navigate('Pesquisas')
+            }).catch( (error) => {
+                console.log('Erro ao modificar pesquisa: ' + error)
+            })  
+        }
     }
 
     return (

@@ -1,38 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getDoc } from 'firebase/firestore'; // Import the necessary Firebase Firestore functions
+import React, { useEffect, useState } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { getDoc } from 'firebase/firestore'
 
 const AcoesPesquisa = (props) => {
 
-	const [cardData, setCardData] = useState(null); // Define um estado para armazenar os dados do cartão
+	const [cardData, setCardData] = useState(null); // Define um estado para armazenar os dados do card
 
 	useEffect(() => {
-		// Função assíncrona para buscar os dados do cartão
+		// Função assíncrona para buscar os dados da pesquisa
 		const fetchCardData = async () => {
 			try {
-				const cardDocument = await getDoc(props.route.params?.cardRef); // Busca o documento usando o cardRef
+				const cardDocument = await getDoc(props.route.params?.cardRef) // Busca o documento usando o cardRef
 				if (cardDocument.exists()) { // Verifica se o documento existe
 					const data = cardDocument.data(); // Obtém os dados do documento
-					setCardData(data); // Define os dados obtidos no estado cardData
+					setCardData(data) // Define os dados obtidos no estado cardData
 
 					props.navigation.setOptions({
-						title: data.nome // Define o título da página como data.nome ou um título padrão se data.nome estiver indefinido
+						title: data.nome // Define o título da página como o nome da pesquisa
 					});
 				} else {
-					console.log('Documento não existe!'); // Registra no console se o documento não existe
+					console.log('Documento não existe!')
 				}
 			} catch (error) {
-				console.error('Erro ao buscar o documento:', error); // Registra no console se houver um erro ao buscar o documento
+				console.error('Erro ao buscar o documento:', error) // Registra no console se houver um erro ao buscar o documento
 			}
 		}
 
-		fetchCardData(); // Chama a função para buscar os dados do cartão
-	}, [props.route.params?.cardRef, props.navigation]); // Executa o useEffect quando props.route.params?.cardRef ou props.navigation mudarem
+		fetchCardData(); // Chama a função para buscar os dados da pesquisa
+	}, [props.route.params?.cardRef, props.navigation]) // Executa o useEffect quando props.route.params?.cardRef ou props.navigation mudarem
 
-	const goToEditSearch = (data) => {
-		console.log(cardData)
-		props.navigation.navigate('ModificarPesquisa', {cardData: data})
+	const goToEditSearch = () => {
+		props.navigation.navigate('ModificarPesquisa', {
+			cardData: cardData, // Passa os dados da pesquisa
+			cardId: props.route.params?.cardRef.id // Passa o id da pesquisa
+		});
 	};
 
 	const goToDataCollect = () => {
