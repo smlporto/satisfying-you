@@ -13,7 +13,7 @@ const Pesquisas = (props) => {
     const pesquisaCollection = collection(db, 'pesquisas')
 
     useEffect(() => {
-        const q = query(pesquisaCollection, orderBy('data', 'asc'))
+        const q = query(pesquisaCollection, orderBy('nome', 'asc'))
 
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const pesquisas = []

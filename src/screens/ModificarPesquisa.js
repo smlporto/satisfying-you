@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal, Image } fro
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import Botao from "../components/Botao"
 import BotaoSecundario from "../components/BotaoSecundario"
-import { updateDoc, doc } from "firebase/firestore"
+import { updateDoc, doc, deleteDoc } from "firebase/firestore"
 import { db } from '../config/firebase'
 
 
@@ -60,7 +60,7 @@ const ModificarPesquisa = (props) => {
         setIsVisible(false)
     }
 
-    const goToHome = () => {
+    const saveChanges = () => {
         if (!txtNome) {
             setNomeError('Preencha o nome da pesquisa');
         } else if (!txtData || txtData.length < 10) {
@@ -81,12 +81,24 @@ const ModificarPesquisa = (props) => {
             }
 
             updateDoc(cardRef, docPesquisa).then( () => {
-                console.log('Pesquisa modificada com sucesso!')
+                console.log('Pesquisa deletada com sucesso!')
                 props.navigation.navigate('Pesquisas')
             }).catch( (error) => {
                 console.log('Erro ao modificar pesquisa: ' + error)
             })  
         }
+    }
+
+    deletePesquisa = () => {
+        const { cardId } = props.route.params
+        const cardRef = doc(db, 'pesquisas', cardId)
+
+        deleteDoc(cardRef).then( () => {
+            console.log('Pesquisa apagada com sucesso!')
+            props.navigation.navigate('Pesquisas')
+        }).catch( (error) => {
+            console.log('Erro ao apagar pesquisa: ' + error)
+        })
     }
 
     return (
@@ -113,7 +125,7 @@ const ModificarPesquisa = (props) => {
 
             {/* Seção de botões */}
             <View style={styles.flexBtn}>
-                <Botao text="Salvar" funcao={goToHome} />
+                <Botao text="Salvar" funcao={saveChanges} />
                 <TouchableOpacity style={styles.flexIcon} onPress={openModal}>
                     <Icon name="delete" size={40} color="#ffffff" />
                     <Text style={styles.textDelete}>Apagar</Text>
@@ -125,7 +137,7 @@ const ModificarPesquisa = (props) => {
                 <View style={modal.modalContent}>
                     <Text style={modal.text}>Tem certeza de apagar essa pesquisa?</Text>
                     <View style={modal.flexBtn}>
-                        <BotaoSecundario text="Sim" color="#FF8383" funcao={goToHome} />
+                        <BotaoSecundario text="Sim" color="#FF8383" funcao={deletePesquisa} />
                         <BotaoSecundario text="Cancelar" color="#3F92C5" funcao={closeModal} />
                     </View>
                 </View>
