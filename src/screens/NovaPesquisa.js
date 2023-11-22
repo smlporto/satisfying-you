@@ -1,51 +1,92 @@
 import { useState } from "react"
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native"
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from "react-native"
 import { collection, addDoc } from 'firebase/firestore'
-import { db } from '../config/firebase'
+import { db, storage } from '../config/firebase'
 import Botao from "../components/Botao"
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { launchCamera, launchImageLibrary } from "react-native-image-picker"
+import BotaoSecundario from "../components/BotaoSecundario"
+import { uploadBytes, ref, getDownloadURL } from "firebase/storage"
+
 
 const NovaPesquisa = (props) => {
 
     const [txtNome, setTxtNome] = useState('')
     const [txtData, setTxtData] = useState('')
-    const [txtImg, setTxtImg] = useState('')
+    //const [txtImg, setTxtImg] = useState('')
     const [txtDataError, setDataError] = useState('')
     const [txtNomeError, setNomeError] = useState('')
-    const [txtImgError, setImgError] = useState('')
+    const [fotoError, setFotoError] = useState('')
+    const [urlFoto, setUrlFoto] = useState('')
+    const [foto, setFoto] = useState()
 
     const pesquisaCollection = collection(db, 'pesquisas')
 
-    const addPesquisa = () => {
+    const addPesquisa = async () => {
         if (!txtNome) {
             setNomeError('Preencha o nome da pesquisa');
         } else if (!txtData || txtData.length < 10) {
             setDataError('Preencha a data')
-        } else if (!txtImg) {
-            setImgError('Preencha a imagem')
+        } else if (!foto) {
+            setFotoError('Selecione uma imagem')
         } else {
             setDataError(null)
             setNomeError(null)
-            setImgError(null)
+            setFotoError(null)
 
-            const docPesquisa = {
-                nome: txtNome,
-                data: txtData,
-                img: txtImg,
-            }
+        
+            const imageRef = ref(storage, 'pesquisas/' + txtNome + '.jpg')
+            const file = await fetch(urlFoto)
+            const blob = await file.blob()
 
-            addDoc(pesquisaCollection, docPesquisa).then( (docRef) => {
-                console.log('Pesquisa adicionada com sucesso!' + docRef.id)
-                props.navigation.navigate('Pesquisas')
+            uploadBytes(imageRef, blob, { contentType: 'image/jpeg' }).then( (result) => {
+                console.log('Imagem enviada com sucesso!')
+                getDownloadURL(imageRef).then( (url) => {
+
+                    const docPesquisa = {
+                        nome: txtNome,
+                        data: txtData,
+                        imageUrl: url
+                    }
+        
+                    addDoc(pesquisaCollection, docPesquisa).then( (docRef) => {
+                        console.log('Pesquisa adicionada com sucesso!' + docRef.id)
+                        props.navigation.navigate('Pesquisas')
+                    }).catch( (error) => {
+                        console.log('Erro ao adicionar pesquisa: ' + error)
+                    })
+                })
+
             }).catch( (error) => {
-                console.log('Erro ao adicionar pesquisa: ' + error)
+                console.log('Erro ao enviar imagem: ' + error)
             })
-
                 
         }
     }
 
-    
+    const selecionarFoto = () => {
+        launchImageLibrary().then( (result) => {
+            setUrlFoto(result.assets[0].uri)
+            setFoto(result.assets[0])
+        }).catch( (error) => {
+            console.log('Erro ao selecionar foto: ' + JSON.stringify(error))
+        })
+    }
+
+
+    const capturarFoto = () => {
+        launchCamera({
+            mediaType: 'photo',
+            cameraType: 'back',
+            quality: 1,
+        }).then( (result) => {
+            setUrlFoto(result.assets[0].uri)
+            setFoto(result.assets[0])
+        }).catch( (error) => {
+            console.log('Erro ao capturar foto: ' + JSON.stringify(error))
+        })
+    }
+
 
     const handleNomeChange = (text) => {
         setTxtNome(text)
@@ -91,9 +132,15 @@ const NovaPesquisa = (props) => {
             {txtDataError ? <Text style={styles.errorText}>{txtDataError}</Text> : null}
 
             <Text style={styles.label}>Imagem</Text>
-            <TextInput style={styles.textInputImagem} value={txtImg} onChangeText={handleImgChange} placeholder="Câmera/Galeria de imagens" />
+            { urlFoto ? null : <TextInput style={styles.textInputImagem} value="Câmera/Galeria" editable={false} /> }
+            { urlFoto ? <Image source={{ uri: urlFoto }} style={{ width: '60%', height: 94 }} /> : null }
+
+            <BotaoSecundario text="Foto da Galeria" funcao={selecionarFoto} />
+            <BotaoSecundario text="Capturar foto" funcao={capturarFoto} />
+
+            
             {/* Exibe mensagem de erro se houver */}
-            {txtImgError ? <Text style={styles.errorText}>{txtImgError}</Text> : null}
+            {fotoError ? <Text style={styles.errorText}>{fotoError}</Text> : null}
 
             <Botao text="Cadastrar" funcao={addPesquisa} />
         </View>
@@ -154,7 +201,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         borderColor: '#ffffff',
         fontFamily: 'AveriaLibre-Regular',
-        color: '#3F92C5',
+        color: 'gray',
         width: '60%',
         height: 94,
     }
