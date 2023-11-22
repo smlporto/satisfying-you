@@ -9,8 +9,8 @@ const Card = ( props ) => {
     return (
         <View style={styles.square}>
             <TouchableOpacity style={styles.card} onPress={props.funcao}>
-                {/* <Image style={styles.imagem} source={{ uri: imgUri }} /> */}
-                <Text style={styles.imgUri}>{imgUri}</Text>
+                <Image style={styles.imagem} source={{ uri: imgUri }} />
+                {/* <Text style={styles.imgUri}>{imgUri}</Text> */}
                 <Text style={styles.nomePesquisa}>{text}</Text>
                 <Text style={styles.data}>{data}</Text>
             </TouchableOpacity>

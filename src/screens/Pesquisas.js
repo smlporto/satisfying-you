@@ -29,7 +29,7 @@ const Pesquisas = (props) => {
 
     const itemPesquisa = ({ item }) => {
         return (
-            <Card text={item.nome} data={item.data} imgUri={item.img} funcao={() => goToAcoesPesquisa(item.id)}/>
+            <Card text={item.nome} data={item.data} imgUri={item.imageUrl} funcao={() => goToAcoesPesquisa(item.id)}/>
         )
     }
 
