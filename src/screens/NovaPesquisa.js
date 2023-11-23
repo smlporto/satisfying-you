@@ -13,7 +13,6 @@ const NovaPesquisa = (props) => {
 
     const [txtNome, setTxtNome] = useState('')
     const [txtData, setTxtData] = useState('')
-    //const [txtImg, setTxtImg] = useState('')
     const [txtDataError, setDataError] = useState('')
     const [txtNomeError, setNomeError] = useState('')
     const [fotoError, setFotoError] = useState('')
@@ -22,6 +21,7 @@ const NovaPesquisa = (props) => {
 
     const pesquisaCollection = collection(db, 'pesquisas')
 
+    
     const addPesquisa = async () => {
         if (!txtNome) {
             setNomeError('Preencha o nome da pesquisa');
@@ -33,7 +33,6 @@ const NovaPesquisa = (props) => {
             setDataError(null)
             setNomeError(null)
             setFotoError(null)
-
         
             const imageRef = ref(storage, 'pesquisas/' + txtNome + '.jpg')
             const file = await fetch(urlFoto)
@@ -64,6 +63,7 @@ const NovaPesquisa = (props) => {
         }
     }
 
+
     const selecionarFoto = () => {
         launchImageLibrary().then( (result) => {
             setUrlFoto(result.assets[0].uri)
@@ -93,13 +93,14 @@ const NovaPesquisa = (props) => {
         setNomeError('')
     }
 
+
     const handleDataChange = (text) => {
         setTxtData(text)
         setDataError('')
-        // Remove all non-numeric characters
+        // Remove caracteres não numéricos
         text = text.replace(/[^0-9]/g, '');
     
-        // Add "/" at position 2 and 5
+        // Adiciona / nas posicoes corretas
         if (text.length > 2) {
           text = text.substring(0, 2) + '/' + text.substring(2);
         }
@@ -110,15 +111,11 @@ const NovaPesquisa = (props) => {
         setTxtData(text);
     }
 
-    const handleImgChange = (text) => {
-        setTxtImg(text)
-        setImgError('')
-    }
-
     return (
         <View style={styles.view}>
             <Text style={styles.label}>Nome</Text>
             <TextInput style={styles.textInput} value={txtNome} onChangeText={handleNomeChange} />
+
             {/* Exibe mensagem de erro se houver */}
             {txtNomeError ? <Text style={styles.errorText}>{txtNomeError}</Text> : null}
 
@@ -128,6 +125,7 @@ const NovaPesquisa = (props) => {
                 <TextInput style={styles.textInputIcon} value={txtData} onChangeText={handleDataChange} keyboardType="number-pad" maxLength={10}/>
                 <Icon style={styles.icon} name="calendar-month" size={30} />
             </View>
+
             {/* Exibe mensagem de erro se houver */}
             {txtDataError ? <Text style={styles.errorText}>{txtDataError}</Text> : null}
 
@@ -138,7 +136,6 @@ const NovaPesquisa = (props) => {
             <BotaoSecundario text="Foto da Galeria" funcao={selecionarFoto} />
             <BotaoSecundario text="Capturar foto" funcao={capturarFoto} />
 
-            
             {/* Exibe mensagem de erro se houver */}
             {fotoError ? <Text style={styles.errorText}>{fotoError}</Text> : null}
 

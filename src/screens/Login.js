@@ -6,6 +6,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth_mod } from '../config/firebase'
 import Botao from '../components/Botao'
 import BotaoSecundario from '../components/BotaoSecundario'
+import { useDispatch } from 'react-redux'
+import { reducerSetLogin } from '../redux/loginSlice'
 
 const theme = {
 	...DefaultTheme,
@@ -22,16 +24,24 @@ const Login = (props) => {
 	const [txtSenha, setSenha] = useState('')
 	const [txtError, setError] = useState('')
 
+	const dispatch = useDispatch()
+
+
 	const isEmailValid = (email) => {
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 		return emailRegex.test(email)
 	}
 
+
 	const goToHome = () => {
 		if (txtEmail && txtSenha && isEmailValid(txtEmail)) {
 			signInWithEmailAndPassword(auth_mod, txtEmail, txtSenha)
 				.then((userLogged) => {
-					console.log('Usuário logado com sucesso: ' + JSON.stringify(userLogged))
+					console.log('Usuário logado com sucesso!')
+
+					// Cria uma ação para o Redux
+					dispatch(reducerSetLogin({email: txtEmail, senha: txtSenha}))
+					
 					props.navigation.navigate('Home')
 				})
 				.catch((error) => {
@@ -44,19 +54,23 @@ const Login = (props) => {
 		}
 	}
 
+
 	const handleEmailChange = (text) => {
 		setEmail(text)
 		setError('')
 	}
+
 
 	const handleSenhaChange = (text) => {
 		setSenha(text)
 		setError('')
 	}
 
+
 	const goToCadastro = () => {
 		props.navigation.navigate('Cadastro')
 	}
+
 
 	const goToRecuperar = () => {
 		props.navigation.navigate('RecuperarSenha')
@@ -101,32 +115,32 @@ const Login = (props) => {
 }
 
 const styles = StyleSheet.create({
-	view: { // Estilo para o componente de visualização principal
+	view: {
 		flex: 1,
 		flexDirection: 'column',
 		backgroundColor: '#372775',
 		padding: 20,
 	},
-	title: { // Estilo para a seção do título e ícone
+	title: {
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
-	titleText: { // Estilo para o texto do título
+	titleText: {
 		fontSize: 36,
 		color: '#ffffff',
 		fontFamily: 'AveriaLibre-Regular',
 	},
-	icon: { // Estilo para o ícone
+	icon: {
 		marginLeft: 15,
 	},
-	label: { // Estilo para os rótulos
+	label: {
 		fontSize: 24,
 		marginTop: 10,
 		color: '#ffffff',
 		fontFamily: 'AveriaLibre-Regular',
 	},
-	textInput: { // Estilo para os campos de entrada de texto
+	textInput: {
 		fontSize: 20,
 		borderWidth: 1,
 		backgroundColor: '#ffffff',
@@ -134,10 +148,10 @@ const styles = StyleSheet.create({
 		fontFamily: 'AveriaLibre-Regular',
 		color: '#3F92C5',
 	},
-	section: { // Estilo para as seções
+	section: {
 		marginTop: 40,
 	},
-	errorText: { // Estilo para a mensagem de erro
+	errorText: {
 		fontFamily: 'AveriaLibre-Regular',
 		color: 'red',
 		fontSize: 16,

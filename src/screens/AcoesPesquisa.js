@@ -1,53 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { getDoc } from 'firebase/firestore'
+import { useSelector } from 'react-redux'
 
 const AcoesPesquisa = (props) => {
 
-	const [cardData, setCardData] = useState(null); // Define um estado para armazenar os dados do card
+	const nome = useSelector(state => state.pesquisa.nome)
 
+	// Define o título da página como o nome da pesquisa
 	useEffect(() => {
-		// Função assíncrona para buscar os dados da pesquisa
-		const fetchCardData = async () => {
-			try {
-				const cardDocument = await getDoc(props.route.params?.cardRef) // Busca o documento usando o cardRef
-				if (cardDocument.exists()) { // Verifica se o documento existe
-					const data = cardDocument.data(); // Obtém os dados do documento
-					setCardData(data) // Define os dados obtidos no estado cardData
+		props.navigation.setOptions({
+			title: nome 
+		})
+	}, [nome, props.navigation])
 
-					props.navigation.setOptions({
-						title: data.nome // Define o título da página como o nome da pesquisa
-					});
-				} else {
-					console.log('Documento não existe!')
-				}
-			} catch (error) {
-				console.error('Erro ao buscar o documento:', error) // Registra no console se houver um erro ao buscar o documento
-			}
-		}
-
-		fetchCardData(); // Chama a função para buscar os dados da pesquisa
-	}, [props.route.params?.cardRef, props.navigation]) // Executa o useEffect quando props.route.params?.cardRef ou props.navigation mudarem
 
 	const goToEditSearch = () => {
-		props.navigation.navigate('ModificarPesquisa', {
-			cardData: cardData, // Passa os dados da pesquisa
-			cardId: props.route.params?.cardRef.id // Passa o id da pesquisa
-		});
-	};
+		props.navigation.navigate('ModificarPesquisa')
+	}
+
 
 	const goToDataCollect = () => {
 		props.navigation.navigate('Coleta')
-	};
+	}
+
 
 	const goToReport = () => {
 		props.navigation.navigate('Relatório')
-	};
+	}
 
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity onPress={() => goToEditSearch(cardData)}>
+			<TouchableOpacity onPress={goToEditSearch}>
 				<View style={styles.square}>
 					<Icon name="file-document-edit-outline" size={80} color="#fff" />
 					<Text style={styles.text}>Modificar</Text>
@@ -72,7 +56,7 @@ const AcoesPesquisa = (props) => {
 }
 
 const styles = StyleSheet.create({
-	container: { // Define um contêiner flexível
+	container: {
 		flex: 1,
 		flexDirection: 'column',
 		justifyContent: 'center',
@@ -80,7 +64,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#372775',
 		gap: 30,
 	},
-	square: { // Define o estilo para os quadrados
+	square: {
 		alignItems: 'center',
 		justifyContent: 'center',
 		padding: 20,

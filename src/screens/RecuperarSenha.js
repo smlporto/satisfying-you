@@ -25,7 +25,7 @@ const RecuperarSenha = (props) => {
 			setError('E-mail parece ser inválido')
 		}
     }
-
+    
     const handleEmailChange = (text) => {
 		setEmail(text)
 		setError('')

@@ -1,12 +1,16 @@
 import { View, Text, StyleSheet } from "react-native"
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer"
 import Icon from 'react-native-vector-icons/Octicons'
+import { useSelector} from "react-redux"
 
 const DrawerNavigator = (props) => {
+
+    const email = useSelector(state => state.login.email)
+    
     return (
         <DrawerContentScrollView {...props} contentContainerStyle={{ flex: 1 }} >
             <View>
-                <Text style={styles.drawerEmail}>jurandir.pereira@hotmail.com</Text>
+                <Text style={styles.drawerEmail}>{email}</Text>
             </View>
             <View style={styles.line} />
             <DrawerItem

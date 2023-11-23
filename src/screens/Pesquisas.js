@@ -1,16 +1,20 @@
 import { View, Text, StyleSheet, TextInput, ScrollView, FlatList } from "react-native"
-import { collection, onSnapshot, query, orderBy, doc } from 'firebase/firestore'
+import { collection, onSnapshot, query, orderBy, doc, getDoc } from 'firebase/firestore'
 import { useEffect, useState } from "react"
 import { db } from '../config/firebase'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Botao from "../components/Botao"
 import Card from "../components/Card"
+import { reducerSetPesquisa } from "../redux/pesquisaSlice"
+import { useDispatch } from 'react-redux'
 
 const Pesquisas = (props) => {
 
     const [listaPesquisas, setListaPesquisas] = useState()
 
     const pesquisaCollection = collection(db, 'pesquisas')
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const q = query(pesquisaCollection, orderBy('nome', 'asc'))
@@ -29,7 +33,7 @@ const Pesquisas = (props) => {
 
     const itemPesquisa = ({ item }) => {
         return (
-            <Card text={item.nome} data={item.data} imgUri={item.imageUrl} funcao={() => goToAcoesPesquisa(item.id)}/>
+            <Card text={item.nome} data={item.data} imgUri={item.imageUrl} funcao={() => goToAcoesPesquisa(item.id)} />
         )
     }
 
@@ -37,9 +41,28 @@ const Pesquisas = (props) => {
         props.navigation.navigate('NovaPesquisa')
     }
 
-    const goToAcoesPesquisa = (id) => {
+    const goToAcoesPesquisa = async (id) => {
         const cardRef = doc(db, 'pesquisas', id)
-        props.navigation.navigate('AcoesPesquisa', { cardRef })
+
+        try {
+            const docSnapshot = await getDoc(cardRef);
+            if (docSnapshot.exists()) {
+                const cardData = docSnapshot.data();
+
+                dispatch(reducerSetPesquisa({
+                    id: id,
+                    nome: cardData.nome,
+                    data: cardData.data,
+                    imageUrl: cardData.imageUrl
+                }))
+
+                props.navigation.navigate('AcoesPesquisa');
+            } else {
+                console.log('O documento não existe!');
+            }
+        } catch (error) {
+            console.error('Erro ao obter dados do documento:', error);
+        }
     }
 
     return (
