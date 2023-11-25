@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from "react-native"
+import { View, Text, TextInput, StyleSheet, Image } from "react-native"
 import { collection, addDoc } from 'firebase/firestore'
 import { db, storage } from '../config/firebase'
 import Botao from "../components/Botao"
@@ -45,7 +45,14 @@ const NovaPesquisa = (props) => {
                     const docPesquisa = {
                         nome: txtNome,
                         data: txtData,
-                        imageUrl: url
+                        imageUrl: url,
+                        votos: {
+                            pessimo: 0,
+                            ruim: 0,
+                            neutro: 0,
+                            bom: 0,
+                            excelente: 0,
+                        }
                     }
         
                     addDoc(pesquisaCollection, docPesquisa).then( (docRef) => {
